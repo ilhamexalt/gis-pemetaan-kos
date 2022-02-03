@@ -1,0 +1,35 @@
+<div class="col-md-2" style="margin-top: 70px;">
+				<form action="" method="get">
+					<div class="form-group">
+						<label for=""></label>
+						<input type="text" name="q" value="<?php echo $this->input->get('q') ?>" class="form-control" id="place-input">
+					</div>
+					<?php if ($this->db->get('categories')->num_rows()) : ?>
+						<div class="form-group">
+							<label></label>
+							<?php foreach ($this->db->get('categories')->result() as $key => $row) : ?>
+								<div class="checkbox checkbox-info">
+									<input type="checkbox" value="<?php echo $row->category_id; ?>" name="categories[<?php echo $key ?>]" <?php if ((int)@in_array($row->category_id, $this->input->get('categories')) and @is_array($this->input->get('categories'))) echo 'checked'; ?>>
+									<label> <?php echo $row->name; ?></label>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+					<div class="form-group">
+						<!-- BLM -->
+						<label for=""></label>
+						<select name="price" id="input" class="form-control">
+
+							<option value="<100K" <?php if ($this->input->get('price') == '<100K') echo 'selected'; ?>>
+							</option>
+							<option value="100K-300K" <?php if ($this->input->get('price') == '100K-300K') echo 'selected'; ?>></option>
+							<option value="300K-500K" <?php if ($this->input->get('price') == '300K-500K') echo 'selected'; ?>></option>
+							<option value="500K" <?php if ($this->input->get('price') == '500K') echo 'selected'; ?>> ></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-primary btn-block"><i class="fa fa-search"></i> Cari</button>
+					</div>
+					<div id="directionsDiv"></div>
+				</form>
+			</div>
